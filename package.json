@@ -29,9 +29,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/axie-mcp.git"
+    "url": "https://github.com/jackdlogan/axie-mcp.git"
   },
-  "homepage": "https://github.com/your-username/axie-mcp#readme",
+  "homepage": "https://github.com/jackdlogan/axie-mcp#readme",
   "engines": {
     "node": ">=18"
   },

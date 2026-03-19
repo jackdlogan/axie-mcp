@@ -34,7 +34,7 @@ axie-mcp
 ### Option C — from source
 
 ```bash
-git clone https://github.com/your-username/axie-mcp.git
+git clone https://github.com/jackdlogan/axie-mcp.git
 cd axie-mcp
 npm install && npm run build
 node dist/index.js

@@ -23,7 +23,7 @@ Query (queries.ts) → Tool Definition (index.ts) → Handler (index.ts)
 
 ### 1. Find the GraphQL query
 
-Check `graphql_schema.graphql` for available fields. The root `Query` type (around line 1965) lists everything the API exposes.
+Use introspection or the [Sky Mavis GraphQL explorer](https://api-gateway.skymavis.com/graphql/axie-marketplace) to browse available fields. The root `Query` type lists everything the API exposes.
 
 Example — finding a user's quest progress:
 ```graphql

@@ -39,6 +39,26 @@ You need a free Sky Mavis API key. Get one at [developers.skymavis.com](https://
 claude mcp add axie-mcp -e SKYMAVIS_API_KEY=your-api-key-here -- npx axie-mcp
 ```
 
+### Other AI Tools (Cursor, Windsurf, Factory AI, etc.)
+
+Any MCP-compatible AI tool can use this server. Add the following to your tool's MCP config:
+
+```json
+{
+  "mcpServers": {
+    "axie-mcp": {
+      "command": "npx",
+      "args": ["axie-mcp"],
+      "env": {
+        "SKYMAVIS_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+The exact location of the config file varies per tool — check your tool's documentation for where to add MCP servers.
+
 ## What You Can Ask
 
 Once connected, just talk to Claude naturally:

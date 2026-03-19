@@ -1,0 +1,50 @@
+{
+  "name": "axie-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Axie Infinity — search Axies, land, players, leaderboards, and marketplace data",
+  "main": "dist/index.js",
+  "bin": {
+    "axie-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "axie",
+    "axie-infinity",
+    "blockchain",
+    "nft",
+    "ronin",
+    "skymavis",
+    "model-context-protocol"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/axie-mcp.git"
+  },
+  "homepage": "https://github.com/your-username/axie-mcp#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^17.3.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  },
+  "type": "module"
+}

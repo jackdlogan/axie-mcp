@@ -50,6 +50,16 @@ const RoninAddress = z.string().min(10).max(100).trim();
 const AxieId = z.string().min(1).max(20).trim();
 const PartId = z.string().min(1).max(80).trim();
 
+// MCP clients sometimes send arrays as JSON strings — unwrap them transparently
+function jsonArray<T extends z.ZodTypeAny>(schema: T) {
+  return z.preprocess((val) => {
+    if (typeof val === "string") {
+      try { return JSON.parse(val); } catch { return val; }
+    }
+    return val;
+  }, schema);
+}
+
 // ─── Zod schemas ────────────────────────────────────────────────────────────
 
 const AxieClassEnum = z.enum([
@@ -590,11 +600,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           from: z.coerce.number().int().min(0).default(0),
           size: z.coerce.number().int().min(1).max(100).default(10),
           sort: SortByEnum.optional(),
-          classes: z.array(AxieClassEnum).optional(),
-          parts: z.array(PartId).max(6).optional(),
-          breedCount: z.array(z.coerce.number().int()).optional(),
-          stages: z.array(z.coerce.number().int()).optional(),
-          numMystic: z.array(z.coerce.number().int()).optional(),
+          classes: jsonArray(z.array(AxieClassEnum)).optional(),
+          parts: jsonArray(z.array(PartId).max(6)).optional(),
+          breedCount: jsonArray(z.array(z.coerce.number().int())).optional(),
+          stages: jsonArray(z.array(z.coerce.number().int())).optional(),
+          numMystic: jsonArray(z.array(z.coerce.number().int())).optional(),
         });
         const parsed = schema.parse(args ?? {});
 
@@ -792,7 +802,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       // ── get_axie_equipment ────────────────────────────────────────────────
       case "get_axie_equipment": {
         const schema = z.object({
-          axieIds: z.array(z.coerce.number().int()),
+          axieIds: jsonArray(z.array(z.coerce.number().int())),
         });
         const { axieIds } = schema.parse(args);
         const data = await client.query<{ axiesEquipments: unknown }>(
@@ -817,7 +827,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case "get_user_activities": {
         const schema = z.object({
           userAddress: RoninAddress,
-          activityTypes: z.array(UserActivityTypeEnum).optional(),
+          activityTypes: jsonArray(z.array(UserActivityTypeEnum)).optional(),
           size: z.coerce.number().int().min(1).max(100).default(10),
         });
         const parsed = schema.parse(args);
